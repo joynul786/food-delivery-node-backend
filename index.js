@@ -7,7 +7,7 @@ const app = express();
 
 // concect DB
 mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGO_URL, () => console.log("DB is successfully connected!"));
+mongoose.connect(process.env.MONGO_URL);
 
 // routes and middlewares
 app.use(cors());
