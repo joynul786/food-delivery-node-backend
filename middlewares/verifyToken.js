@@ -1,7 +1,7 @@
 const JWT = require("jsonwebtoken");
 
 // Verify token
-module.exports = verifyToken = (req, resp, next) => {
+const verifyToken = (req, resp, next) => {
     let token = req.headers["authorization"];
     try {
         if (token) {
@@ -23,7 +23,7 @@ module.exports = verifyToken = (req, resp, next) => {
 };
 
 // Verify admin
-module.exports = verifyAdmin = (req, resp, next) => {
+const verifyAdmin = (req, resp, next) => {
     let token = req.headers["authorization"];
     try {
         if (token) {
@@ -47,3 +47,8 @@ module.exports = verifyAdmin = (req, resp, next) => {
         resp.status(500).json({ Msg: "An error occurred while processing your request!" });
     };
 };
+
+module.exports = {
+    verifyToken,
+    verifyAdmin
+}

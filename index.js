@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 const authController = require("./controllers/authController");
+const productController = require("./controllers/productController");
 const app = express();
 
 // concect DB
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/auth", authController);
+app.use("/product", productController);
 
 
 // start server
