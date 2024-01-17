@@ -32,15 +32,10 @@ module.exports = productController.get("/find/:id", verifyToken, async (req, res
 
 // Create products
 module.exports = productController.post("/", verifyAdmin, async (req, resp) => {
-    const { title, price, desc, img, reviews, category } = req.body;
-    try {
-        if (title, price, desc, img, reviews, category) {
-            const newProduct = await productModel.create({...req.body});
-            return resp.status(201).json(newProduct);
-        } else {
-            return resp.status(400).json({ Msg: "All details of product is must required!" });
-        };
-    } catch (error) {
-        console.error(error);
-    };
+  try {
+    const newProduct = await productModel.create({ ...req.body });
+    return resp.status(201).json(newProduct);
+  } catch (error) {
+    console.error(error);
+  }
 });
