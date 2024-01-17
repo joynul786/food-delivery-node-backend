@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         require: true,
     },
-    desc: {
+    description: {
         type: String,
         require: true,
         min: 8,
