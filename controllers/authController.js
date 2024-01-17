@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 
 // API for register
-authController.post("/register", async (req, resp) => {
+module.exports = authController.post("/register", async (req, resp) => {
     try {
         const { username, email, password } = req.body;
         
@@ -29,7 +29,7 @@ authController.post("/register", async (req, resp) => {
 });
 
 // API for login
-authController.post("/login", async (req, resp) => {
+module.exports = authController.post("/login", async (req, resp) => {
     try {
         const { email, password } = req.body;
 
@@ -50,5 +50,3 @@ authController.post("/login", async (req, resp) => {
         return resp.status(500).json(error.message);
     };
 });
-
-module.exports = authController;
