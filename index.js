@@ -11,7 +11,7 @@ const app = express();
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGO_URL);
 
-// routes and middlewares
+// middlewares and routes
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

@@ -6,7 +6,7 @@ const { verifyToken } = require("../middlewares/verifyToken");
 const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, resp, cb) {
-            cb(null, "assets/images");
+            cb(null, "public/images");
         },
         filename: function (req, file, cb) {
             cb(null, req.body.filename);
