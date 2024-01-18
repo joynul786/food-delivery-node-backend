@@ -1,19 +1,24 @@
-const mongoose = require("mongoose");
+import mongoose from "moongose";
 
 const productSchema = new mongoose.Schema({
     title: {
         type: String,
         require: true,
         min: 4,
+        trim: true,
+        index: true
     },
     price: {
         type: Number,
         require: true,
+        trim: true,
+        index: true
     },
     description: {
         type: String,
         require: true,
         min: 8,
+        trim: true,
     },
     img: {
         type: String,
@@ -22,10 +27,13 @@ const productSchema = new mongoose.Schema({
     reviews: {
         type: Number,
         require: true,
+        trim: true,
     },
     category: {
         type: String,
         require: true,
+        trim: true,
+        index: true
     },
 });
 

@@ -1,7 +1,9 @@
-const authController = require("express").Router();
-const userModel = require("../models/userSchema");
-const bcrypt = require("bcrypt");
-const JWT = require("jsonwebtoken");
+import express from 'express';
+import { userModel } from '../models/userSchema';
+import bcrypt from 'bcrypt';
+import JWT from 'jsonwebtoken';
+
+const authController = express.Router();
 
 // API for register
 module.exports = authController.post("/register", async (req, resp) => {
@@ -20,11 +22,11 @@ module.exports = authController.post("/register", async (req, resp) => {
 
             const Token = JWT.sign({ id: newUserDetails._id, isAdmin: newUserDetails.isAdmin }, process.env.JWT_SECRET, { expiresIn: "12h" });
             
-            return resp.status(201).json({ newUserDetails, Token });
+            return resp.status(201).send({ newUserDetails, Token });
         };
             
     } catch (error) {
-        return resp.status(500).json(error.message);
+        return resp.status(500).send(error.message);
     };
 });
 
@@ -41,12 +43,12 @@ module.exports = authController.post("/login", async (req, resp) => {
 
             const Token = JWT.sign({ id: userExist._id, isAdmin: userExist.isAdmin }, process.env.JWT_SECRET, { expiresIn: "12h" });
 
-            return resp.status(202).json({ userExist, Token });
+            return resp.status(202).send({ userExist, Token });
         } else {
             throw new Error("Email or Password is wrong!");
         };
         
     } catch (error) {
-        return resp.status(500).json(error.message);
+        return resp.status(500).send(error.message);
     };
 });

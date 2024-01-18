@@ -1,20 +1,25 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const dotenv = require("dotenv").config();
-const authController = require("./controllers/authController");
-const productController = require("./controllers/productController");
-const uploadController = require("./controllers/uploadController");
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
+
+import authController from "./controllers/authController";
+import productController from "./controllers/productController";
+import uploadController from "./controllers/uploadController";
+
 const app = express();
 
 // concect DB
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGO_URL);
 
-// middlewares and routes
+// middlewares 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
+
+// routes
 app.use("/auth", authController);
 app.use("/product", productController);
 app.use("/image", uploadController);
