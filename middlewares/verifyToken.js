@@ -1,4 +1,4 @@
-import JWT from "jsonwebtoken";
+const JWT = require ("jsonwebtoken");
 
 // Verify token
 const verifyToken = (req, resp, next) => {

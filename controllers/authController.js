@@ -1,9 +1,7 @@
-import express from 'express';
-import { userModel } from '../models/userSchema';
-import bcrypt from 'bcrypt';
-import JWT from 'jsonwebtoken';
-
-const authController = express.Router();
+const authController = require("express").Router();
+const userModel = require("../models/userSchema");
+const bcrypt = require("bcrypt");
+const JWT = require("jsonwebtoken");
 
 // API for register
 module.exports = authController.post("/register", async (req, resp) => {

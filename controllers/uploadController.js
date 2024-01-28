@@ -1,8 +1,6 @@
-import express from 'express';
-import multer from 'multer';
-import { verifyToken } from '../middlewares/verifyToken';
-
-const uploadController = express.Router();
+const uploadController = require("express").Router();
+const multer = require("multer");
+const { verifyToken } = require("../middlewares/verifyToken");
 
 // File upload
 const upload = multer({

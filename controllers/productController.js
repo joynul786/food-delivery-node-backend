@@ -1,8 +1,6 @@
-import express from 'express';
-import { productModel } from '../models/productSchema';
-import { verifyToken, verifyAdmin } from '../middlewares/verifyToken';
-
-const productController = express.Router();
+const productController = require("express").Router();
+const productModel = require("../models/productSchema");
+const { verifyToken, verifyAdmin } = require("../middlewares/verifyToken");
 
 // Get all
 module.exports = productController.get("/", verifyToken, async (req, resp) => {

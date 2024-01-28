@@ -1,12 +1,11 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import dotenv from "dotenv";
-dotenv.config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const dotenv = require("dotenv").config();
 
-import authController from "./controllers/authController";
-import productController from "./controllers/productController";
-import uploadController from "./controllers/uploadController";
+const authController = require("./controllers/authController");
+const productController = require("./controllers/productController");
+const uploadController = require("./controllers/uploadController");
 
 const app = express();
 
