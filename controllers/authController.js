@@ -50,3 +50,23 @@ module.exports = authController.post("/login", async (req, resp) => {
         return resp.status(500).send(error.message);
     };
 });
+
+// Api for signed up password update
+module.exports = authController.put("/forgotPassword/:email", async (req, resp) => {
+    const { password } = req.body;
+    try {
+        const userExist = await userModel.findOne({ email: req.params.email });
+        if (userExist) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const resultData = await userModel.updateOne(
+                { email: req.params.email },
+                { $set: { password: hashedPassword } },
+            );
+            resultData && resp.status(201).send({Msg: "Password has been changed successfully!"})
+        } else {
+            throw new Error("This Email does not exist!!");
+        };
+    } catch (error) {
+        return resp.status(500).send(error.message);
+    };
+});
