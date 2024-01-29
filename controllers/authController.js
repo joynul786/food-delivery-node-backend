@@ -52,14 +52,14 @@ module.exports = authController.post("/login", async (req, resp) => {
 });
 
 // Api for signed up password update
-module.exports = authController.put("/forgotPassword/:email", async (req, resp) => {
-    const { password } = req.body;
+module.exports = authController.put("/password-update", async (req, resp) => {
+    const { email, password } = req.body;
     try {
-        const userExist = await userModel.findOne({ email: req.params.email });
+        const userExist = await userModel.findOne({ email: email });
         if (userExist) {
             const hashedPassword = await bcrypt.hash(password, 10);
             const resultData = await userModel.updateOne(
-                { email: req.params.email },
+                { email: email },
                 { $set: { password: hashedPassword } },
             );
             resultData && resp.status(201).send({Msg: "Password has been changed successfully!"})
