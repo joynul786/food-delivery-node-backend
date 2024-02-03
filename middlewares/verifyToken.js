@@ -2,7 +2,7 @@ const JWT = require ("jsonwebtoken");
 
 // Verify token
 const verifyToken = (req, resp, next) => {
-    let token = req.headers["authorization"];
+    let token = req.headers["Authorization"];
     try {
         if (token) {
             token = token.split(" ")[1];
@@ -24,7 +24,7 @@ const verifyToken = (req, resp, next) => {
 
 // Verify admin
 const verifyAdmin = (req, resp, next) => {
-    let token = req.headers["authorization"];
+    let token = req.headers["Authorization"];
     try {
         if (token) {
             token = token.split(" ")[1];
