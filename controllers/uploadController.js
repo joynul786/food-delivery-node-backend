@@ -1,6 +1,6 @@
 const uploadController = require("express").Router();
 const multer = require("multer");
-const { verifyToken } = require("../middlewares/verifyToken");
+const { verifyAdmin } = require("../middlewares/verifyToken");
 
 // File upload
 const upload = multer({
@@ -15,7 +15,7 @@ const upload = multer({
 }).single("image");
 
 // API for file upload
-module.exports = uploadController.post("/image", verifyToken, upload, (_, resp) => {
+module.exports = uploadController.post("/image", verifyAdmin, upload, (_, resp) => {
     try {
         return resp.status(201).send({ Msg: "Successfully uploaded file!" });
     } catch (error) {

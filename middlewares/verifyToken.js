@@ -2,11 +2,11 @@ const JWT = require ("jsonwebtoken");
 
 // Verify token
 const verifyToken = (req, resp, next) => {
-    let token = req.headers["Authorization"];
+    let token = req.headers.authorization;
     try {
         if (token) {
             token = token.split(" ")[1];
-            JWT.verify(token, process.env.JWT_SECRET, (err, _) => {
+            JWT.verify(token, process.env.JWT_SECRET, (err, data) => {
                 if (err) {
                     resp.status(403).send("Wrong or expired token!");
                 } else {
@@ -24,7 +24,7 @@ const verifyToken = (req, resp, next) => {
 
 // Verify admin
 const verifyAdmin = (req, resp, next) => {
-    let token = req.headers["Authorization"];
+    let token = req.headers.authorization;
     try {
         if (token) {
             token = token.split(" ")[1];
@@ -34,7 +34,7 @@ const verifyAdmin = (req, resp, next) => {
                 } else {
                     // data = {id: newUserDetails._id, isAdmin: newUserDetails.isAdmin}
                     if (!data.isAdmin) {
-                        resp.status(403).send({ Msg: "You are not admin!" });
+                        resp.status(403).send({ Msg: "You are not an admin!" });
                     };
                     next();
                 };
