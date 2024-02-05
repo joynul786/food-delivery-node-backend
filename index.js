@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/auth", authController);
 app.use("/product", productController);
 app.use("/upload", uploadController);
+app.use("/images", express.static("public/images"));
 
 // start server
 app.listen(process.env.LISTEN_PORT, () => console.log("Server has been started successfully!"));
