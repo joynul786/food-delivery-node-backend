@@ -16,26 +16,15 @@ module.exports = productController.get("/", verifyToken, async (req, resp) => {
     };
 });
 
-// Get one
-module.exports = productController.get("/find/:id", verifyToken, async (req, resp) => {
+// Create products
+module.exports = productController.post("/", verifyAdmin, async (req, resp) => {
     try {
-        const product = await productModel.findById(req.params.id);
-        if (product) {
-            return resp.status(200).send(product);
-        } else {
-            return resp.status(500).send({ Msg: "No product with such id!" });
-        }
+        const { title, description, category, img, price } = req.body;
+        if (title, description, category, img, price) {
+            const newProduct = await productModel.create({ ...req.body });
+            return resp.status(201).send(newProduct);
+        };
     } catch (error) {
         console.error(error);
     };
-});
-
-// Create products
-module.exports = productController.post("/", verifyAdmin, async (req, resp) => {
-  try {
-    const newProduct = await productModel.create({ ...req.body });
-    return resp.status(201).send(newProduct);
-  } catch (error) {
-    console.error(error);
-  }
 });
