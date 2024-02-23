@@ -2,6 +2,7 @@ const authController = require("express").Router();
 const userModel = require("../models/userSchema");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
+const { verifyToken } = require("../middlewares/verifyToken");
 
 // API for register
 module.exports = authController.post("/register", async (req, resp) => {
@@ -66,6 +67,21 @@ module.exports = authController.put("/password-update", async (req, resp) => {
         } else {
             throw new Error("This Email does not exist!!");
         };
+    } catch (error) {
+        return resp.status(500).send(error.message);
+    };
+});
+
+// Api for delete account
+module.exports = authController.delete("/account-delete/:id", verifyToken, async (req, resp) => {
+    try {
+        const userAccount = await userModel.deleteOne({ _id: req.params.id });
+        if (userAccount) {
+            resp.status(200).send({ Msg: "Your account has been deleted successfully!!" });
+        } else {
+            throw new Error("Something went wrong!");
+        };
+
     } catch (error) {
         return resp.status(500).send(error.message);
     };
